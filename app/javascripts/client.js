@@ -4,6 +4,7 @@
 
 var speedDatingApp = angular.module('speedDatingApp', [
   'ngRoute',
+  'speed-dating.controllers.index',
   'speed-dating.controllers.events.index',
   'speed-dating.controllers.events.event',
   'speed-dating.controllers.events.dates.index',
@@ -15,6 +16,10 @@ var speedDatingApp = angular.module('speedDatingApp', [
 speedDatingApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
+        when('/', {
+          templateUrl: 'partials/index',
+          controller: 'HomeCtrl'
+        }).
         when('/events', {
           templateUrl: 'partials/events/index',
           controller: 'EventsCtrl'
@@ -23,12 +28,12 @@ speedDatingApp.config(['$routeProvider',
           templateUrl: 'partials/events/event',
           controller: 'EventCtrl'
         }).
-        when('/event/:eventId/dates', {
-          templateUrl: 'partials/event/date',
-          controller: 'DateCtrl'
+        when('/events/:eventId/dates', {
+          templateUrl: 'partials/events/dates/index',
+          controller: 'DatesCtrl'
         }).
-        when('/event/:eventId/dates/:dateId', {
-          templateUrl: 'partials/event/date',
+        when('/events/:eventId/dates/:dateId', {
+          templateUrl: 'partials/events/dates/date',
           controller: 'DateCtrl'
         }).
         otherwise({

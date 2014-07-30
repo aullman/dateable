@@ -22809,6 +22809,12 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 'use strict';
 
+angular.module('speed-dating.controllers.index', []).controller('HomeCtrl', ['$scope',
+  function($scope) {
+    $scope.msg = 'Welcome to speed dating.';
+  }]);
+'use strict';
+
 angular.module('speed-dating.controllers.events.event', []).controller('EventCtrl', ['$scope',
   function($scope) {
     $scope.msg = 'You are at a speed dating event.';
@@ -22821,13 +22827,13 @@ angular.module('speed-dating.controllers.events.index', []).controller('EventsCt
   }]);
 'use strict';
 
-angular.module('speed-dating.controllers.events.dates.date', []).controller('DateCtrl', ['$scope', 'Phone',
+angular.module('speed-dating.controllers.events.dates.date', []).controller('DateCtrl', ['$scope',
   function($scope) {
     $scope.msg = 'You are on a date.';
   }]);
 'use strict';
 
-angular.module('speed-dating.controllers.events.dates.index', []).controller('DatesCtrl', ['$scope', 'Phone',
+angular.module('speed-dating.controllers.events.dates.index', []).controller('DatesCtrl', ['$scope',
   function($scope) {
     $scope.msg = 'Here are the dates.';
   }]);
@@ -22837,6 +22843,7 @@ angular.module('speed-dating.controllers.events.dates.index', []).controller('Da
 
 var speedDatingApp = angular.module('speedDatingApp', [
   'ngRoute',
+  'speed-dating.controllers.index',
   'speed-dating.controllers.events.index',
   'speed-dating.controllers.events.event',
   'speed-dating.controllers.events.dates.index',
@@ -22848,6 +22855,10 @@ var speedDatingApp = angular.module('speedDatingApp', [
 speedDatingApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
+        when('/', {
+          templateUrl: 'partials/index',
+          controller: 'HomeCtrl'
+        }).
         when('/events', {
           templateUrl: 'partials/events/index',
           controller: 'EventsCtrl'
@@ -22856,12 +22867,12 @@ speedDatingApp.config(['$routeProvider',
           templateUrl: 'partials/events/event',
           controller: 'EventCtrl'
         }).
-        when('/event/:eventId/dates', {
-          templateUrl: 'partials/event/date',
-          controller: 'DateCtrl'
+        when('/events/:eventId/dates', {
+          templateUrl: 'partials/events/dates/index',
+          controller: 'DatesCtrl'
         }).
-        when('/event/:eventId/dates/:dateId', {
-          templateUrl: 'partials/event/date',
+        when('/events/:eventId/dates/:dateId', {
+          templateUrl: 'partials/events/dates/date',
           controller: 'DateCtrl'
         }).
         otherwise({
