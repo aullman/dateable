@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-//var partials = require('./app/routes/partials');
+var partials = require('./app/routes/partials');
 //var index = require('./app/routes/index');
 
 var app = express();
@@ -30,10 +30,7 @@ app.get('/', function(req, res) {
   res.render('index', { title: 'Speed dating' });
 });
 
-app.get('/partials/*', function(req, res) {
-  var partial = req.url.replace(/^\//, '');
-  res.render(partial);
-});
+app.use('/partials', partials);
 
 app.get('*', function(req, res) {
   res.render('index', { title: 'Speed dating' });
