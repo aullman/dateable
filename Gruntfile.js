@@ -18,13 +18,15 @@ module.exports = function (grunt) {
           'bower_components/bootstrap/dist/bootstrap.js',
           'bower_components/angular/angular.js',
           'bower_components/angular-route/angular-route.js',
-          'app/javascripts/controllers/index-controller.js',
-          'app/javascripts/controllers/events/event-controller.js',
-          'app/javascripts/controllers/events/index-controller.js',
-          'app/javascripts/controllers/events/dates/date-controller.js',
-          'app/javascripts/controllers/events/dates/index-controller.js',
-          'app/javascripts/controllers/date-controller.js',
-          'app/javascripts/client.js'
+          'app/client/javascripts/controllers/index-controller.js',
+          'app/client/javascripts/controllers/events/event-controller.js',
+          'app/client/javascripts/controllers/events/index-controller.js',
+          'app/client/javascripts/controllers/events/dates/date-controller.js',
+          'app/client/javascripts/controllers/events/dates/index-controller.js',
+          'app/client/javascripts/controllers/controllers.js',
+          'app/client/javascripts/filters/partition-filter.js',
+          'app/client/javascripts/filters/filters.js',
+          'app/client/javascripts/client.js'
         ],
         dest: 'public/javascripts/client.js'
       }
@@ -49,7 +51,7 @@ module.exports = function (grunt) {
           paths: ["bower_components/bootstrap/less"]
         },
         files: {
-          "public/stylesheets/client.css": "app/stylesheets/client.less"
+          "public/stylesheets/client.css": "app/client/stylesheets/client.less"
         }
       }
     }

@@ -5,13 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var partials = require('./app/routes/partials');
-var index = require('./app/routes/index');
+var partials = require('./app/server/routes/partials');
+var index = require('./app/server/routes/index');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'app/views'));
+app.set('views', path.join(__dirname, 'app/server/views'));
 app.set('view engine', 'jade');
 
 app.use(favicon());

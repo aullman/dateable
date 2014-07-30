@@ -4,12 +4,8 @@
 
 var speedDatingApp = angular.module('speedDatingApp', [
   'ngRoute',
-  'speed-dating.controllers.index',
-  'speed-dating.controllers.events.index',
-  'speed-dating.controllers.events.event',
-  'speed-dating.controllers.events.dates.index',
-  'speed-dating.controllers.events.dates.date'
-//  'speedDatingFilters',
+  'speed-dating.controllers',
+  'speed-dating.filters'
 //  'speedDatingServices'
 ]);
 

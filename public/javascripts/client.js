@@ -22807,48 +22807,68 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 
 })(window, window.angular);
 
-'use strict';
-
 angular.module('speed-dating.controllers.index', []).controller('HomeCtrl', ['$scope',
   function($scope) {
     $scope.msg = 'Welcome to speed dating.';
   }]);
-'use strict';
-
 angular.module('speed-dating.controllers.events.event', []).controller('EventCtrl', ['$scope',
   function($scope) {
     $scope.msg = 'You are at a speed dating event.';
   }]);
-'use strict';
-
 angular.module('speed-dating.controllers.events.index', []).controller('EventsCtrl', ['$scope',
   function($scope) {
     $scope.msg = 'Here are the speed dating events.';
   }]);
-'use strict';
-
 angular.module('speed-dating.controllers.events.dates.date', []).controller('DateCtrl', ['$scope',
   function($scope) {
     $scope.msg = 'You are on a date.';
   }]);
-'use strict';
-
 angular.module('speed-dating.controllers.events.dates.index', []).controller('DatesCtrl', ['$scope',
   function($scope) {
     $scope.msg = 'Here are the dates.';
   }]);
+angular.module('speed-dating.controllers',[
+  'speed-dating.controllers.index',
+  'speed-dating.controllers.events.index',
+  'speed-dating.controllers.events.event',
+  'speed-dating.controllers.events.dates.index',
+  'speed-dating.controllers.events.dates.date'
+]);
+'use strict';
+
+/**
+ * @see http://stackoverflow.com/a/21653981/572011
+ */
+angular.module('speed-dating.filters.partition', []).filter('partition', function () {
+  var cache = {};
+  return function (arr, size) {
+    if (!arr) {
+      return arr;
+    }
+    var partitioned = [];
+    for (var i = 0; i < arr.length; i += size) {
+      partitioned.push(arr.slice(i, i + size));
+    }
+    var serialized = JSON.stringify(arr);
+    var fromCache = cache[serialized + size];
+    if (JSON.stringify(fromCache) === JSON.stringify(partitioned)) {
+      return fromCache;
+    }
+    cache[serialized + size] = partitioned;
+    return partitioned;
+  };
+});
+angular.module('speed-dating.filters',[
+  'speed-dating.filters.partition'
+]);
 'use strict';
 
 /* App Module */
 
 var speedDatingApp = angular.module('speedDatingApp', [
   'ngRoute',
-  'speed-dating.controllers.index',
-  'speed-dating.controllers.events.index',
-  'speed-dating.controllers.events.event',
-  'speed-dating.controllers.events.dates.index',
-  'speed-dating.controllers.events.dates.date'
-//  'speedDatingFilters',
+  'speed-dating.controllers',
+  'speed-dating.filters'
 //  'speedDatingServices'
 ]);
 
