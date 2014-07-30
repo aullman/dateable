@@ -6,11 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var partials = require('./app/routes/partials');
-//var index = require('./app/routes/index');
+var index = require('./app/routes/index');
 
 var app = express();
-
-console.log("APP>JS")
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app/views'));
@@ -23,18 +21,9 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use('/partials/:name', partials);
-//app.use('/*', index);
-
-app.get('/', function(req, res) {
-  res.render('index', { title: 'Speed dating' });
-});
 
 app.use('/partials', partials);
-
-app.get('*', function(req, res) {
-  res.render('index', { title: 'Speed dating' });
-});
+app.get('*', index);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
