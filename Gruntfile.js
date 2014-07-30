@@ -17,7 +17,11 @@ module.exports = function (grunt) {
           'bower_components/jquery/jquery.js',
           'bower_components/bootstrap/dist/bootstrap.js',
           'bower_components/angular/angular.js',
-          'javascripts/client.js'
+          'bower_components/angular-route/angular-route.js',
+          'app/javascripts/controllers/events/event-controller.js',
+          'app/javascripts/controllers/events/index-controller.js',
+          'app/javascripts/controllers/date-controller.js',
+          'app/javascripts/client.js'
         ],
         dest: 'public/javascripts/client.js'
       }
@@ -25,14 +29,14 @@ module.exports = function (grunt) {
     uglify: {
       javascripts: {
         files: {
-          'public/client.js': 'public/client.js'
+          'public/javascripts/client.js': 'public/javascripts/client.js'
         }
       }
     },
     cssmin: {
       stylesheets: {
         files: {
-          'public/client.css': 'public/client.css'
+          'public/stylesheets/client.css': 'public/stylesheets/client.css'
         }
       }
     },
@@ -53,8 +57,8 @@ module.exports = function (grunt) {
 
   // Define task(s).
   grunt.registerTask('build', ['clean', 'copy', 'concat', 'less']);
-  grunt.registerTask('minify', ['cssmin', 'uglify']);
+  grunt.registerTask('minify', ['cssmin']);
 
-  grunt.registerTask('deploy', ['build', 'less', 'minify']);
+  grunt.registerTask('deploy', ['build', 'minify']);
   grunt.registerTask('default', 'build');
 };
