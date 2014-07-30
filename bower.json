@@ -1,0 +1,27 @@
+{
+  "name": "speed-dating",
+  "version": "0.0.1",
+  "private": true,
+  "description": "An online speed dating app.",
+  "main": "server.js",
+  "authors": [
+    "Luke Eller <luke.eller@bigcommerce.com>"
+  ],
+  "keywords": [
+    "dating"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "angular": "~1.2.21",
+    "bootstrap": "~3.2.0",
+    "angular-route": "~1.2.21"
+  }
+}

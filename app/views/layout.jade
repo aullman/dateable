@@ -1,0 +1,10 @@
+doctype html
+html(ng-app)
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/client.css')
+  body
+    div.container
+      include header
+      block content
+      include footer
