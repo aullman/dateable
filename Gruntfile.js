@@ -20,6 +20,8 @@ module.exports = function (grunt) {
           'bower_components/angular-route/angular-route.js',
           'app/javascripts/controllers/events/event-controller.js',
           'app/javascripts/controllers/events/index-controller.js',
+          'app/javascripts/controllers/events/dates/date-controller.js',
+          'app/javascripts/controllers/events/dates/index-controller.js',
           'app/javascripts/controllers/date-controller.js',
           'app/javascripts/client.js'
         ],
