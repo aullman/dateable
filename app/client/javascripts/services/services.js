@@ -1,0 +1,1 @@
+angular.module('speed-dating.services', ['speed-dating.services.event', 'speed-dating.services.open-tok']);

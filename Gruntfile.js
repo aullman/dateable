@@ -14,19 +14,12 @@ module.exports = function (grunt) {
     concat: {
       javascripts: {
         src: [
-          'bower_components/jquery/jquery.js',
-          'bower_components/bootstrap/dist/bootstrap.js',
+          'bower_components/lodash/dist/lodash.js',
+          'bower_components/jquery/dist/jquery.js',
+          'bower_components/bootstrap/dist/js/bootstrap.js',
           'bower_components/angular/angular.js',
           'bower_components/angular-route/angular-route.js',
-          'app/client/javascripts/controllers/index-controller.js',
-          'app/client/javascripts/controllers/events/event-controller.js',
-          'app/client/javascripts/controllers/events/index-controller.js',
-          'app/client/javascripts/controllers/events/dates/date-controller.js',
-          'app/client/javascripts/controllers/events/dates/index-controller.js',
-          'app/client/javascripts/controllers/controllers.js',
-          'app/client/javascripts/filters/partition-filter.js',
-          'app/client/javascripts/filters/filters.js',
-          'app/client/javascripts/client.js'
+          'app/client/javascripts/**'
         ],
         dest: 'public/javascripts/client.js'
       }

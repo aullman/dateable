@@ -1,27 +1,36 @@
 .jumbotron
-  h1 Events Index
+  h1 Events
     p.lead
-      | Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+      | Join an existing event or create your own.
     p
-      a.btn.btn-lg.btn-success(href='#', role='button') Sign up today
+      button.btn.btn-lg.btn-success(type='button', role='button', data-toggle='modal', data-target='#eventModal') Create
 .row.marketing
-  .col-lg-6
-    h4 Subheading
-    p
-      | {{ msg }}
-    h4 Subheading
-    p
-      | Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
-    h4 Subheading
-    p Maecenas sed diam eget risus varius blandit sit amet non magna.
-  .col-lg-6
-    h4 Subheading
-    p
-      | Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.
-    h4 Subheading
-    p
-      | Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
-    h4 Subheading
-    p {{ msg }}
-    p
-      a.btn.btn-primary(href='#', role='button') Join »
+  div(ng-repeat="event in events")
+    .col-lg-6
+      h4 {{ event.name }}
+      p {{ event.description }}
+      p
+        a.btn.btn-primary(href='#', role='button') Join
+
+#eventModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='eventModalLabel', aria-hidden='true')
+  .modal-dialog
+    .modal-content
+      form.form-horizontal(role='form', name='newEvent', ng-submit="createEvent(event)", novalidate)
+        .modal-header
+          button.close(type='button', data-dismiss='modal')
+            span(aria-hidden='true') ×
+            span.sr-only Close
+          h4#eventModalLabel.modal-title Create an event
+        .modal-body
+          .form-group(ng-class="{ 'has-error' : newEvent.name.$invalid && !newEvent.name.$pristine }")
+            label.col-sm-2.control-label(for='newEventName') Name
+            .col-sm-10
+              input#newEventName.form-control(type='text', name='name', ng-model='event.name', placeholder='Name', required)
+              p.help-block(ng-show='newEvent.name.$invalid && !newEvent.name.$pristine') An event name is required.
+          .form-group
+            label.col-sm-2.control-label(for='newEventDescription') Description
+            .col-sm-10
+              input#newEventDescription.form-control(type='text', name='description', ng-model='event.description', placeholder='Description')
+        .modal-footer
+          button.btn.btn-default(type='button', data-dismiss='modal') Close
+          input.btn.btn-primary(type='submit', value='Create', ng-disabled="newEvent.$invalid")

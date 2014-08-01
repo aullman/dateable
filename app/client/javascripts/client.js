@@ -5,8 +5,8 @@
 var speedDatingApp = angular.module('speedDatingApp', [
   'ngRoute',
   'speed-dating.controllers',
-  'speed-dating.filters'
-//  'speedDatingServices'
+  'speed-dating.filters',
+  'speed-dating.services'
 ]);
 
 speedDatingApp.config(['$routeProvider',
