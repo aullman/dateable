@@ -30,7 +30,9 @@
           .form-group
             label.col-sm-2.control-label(for='newEventDescription') Description
             .col-sm-10
-              input#newEventDescription.form-control(type='text', name='description', ng-model='event.description', placeholder='Description')
+              textarea#newEventDescription.form-control(name='description', ng-model='event.description', placeholder='Description')
         .modal-footer
           button.btn.btn-default(type='button', data-dismiss='modal') Close
-          input.btn.btn-primary(type='submit', value='Create', ng-disabled="newEvent.$invalid")
+          button.btn.btn-primary(type='submit', ng-disabled="newEvent.$invalid")
+            span(ng-show='event.creating') Creating&hellip;
+            span(ng-show='!event.creating') Create
