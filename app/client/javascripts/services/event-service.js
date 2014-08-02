@@ -33,6 +33,13 @@ angular.module('speed-dating.services.event', []).factory('EventService', ['$htt
       }));
     };
 
+    methods.find = function find(id) {
+      id = parseInt(id);
+      return $q.when(_.find(events, function (event) {
+        return event.id === id;
+      }));
+    };
+
     /**
      * @returns {Array}
      */

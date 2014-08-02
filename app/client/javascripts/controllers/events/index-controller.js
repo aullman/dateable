@@ -1,5 +1,5 @@
-angular.module('speed-dating.controllers.events.index', ['speed-dating.services.event']).controller('EventsCtrl',
-    ['$scope', '$location', 'EventService',
+angular.module('speed-dating.controllers.events.index', ['speed-dating.services.event'])
+    .controller('EventsCtrl', ['$scope', '$location', 'EventService',
       function ($scope, $location, EventService) {
 
         var resetModal = function resetModal() {
