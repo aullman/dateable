@@ -1,9 +1,11 @@
 div.header
   ul.nav.nav-pills.pull-right
-    li.active
+    li(sd-active='^/?$')
       a(href='#') Home
-    li
-      a(href='#') About
-    li
-      a(href='#') Contact
+    li(sd-active='^/events')
+      a(href='#/events') Events
+    li(sd-active='^/about')
+      a(href='#/about') About
+    li(sd-active='^/contact')
+      a(href='#/contact') Contact
   h3.text-muted Speed dating

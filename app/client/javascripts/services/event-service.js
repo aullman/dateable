@@ -4,13 +4,13 @@ angular.module('speed-dating.services.event', []).factory('EventService', ['$htt
 
     /**
      * A client-side cache of events.
+     *
      * @type {Array}
      */
     var events = [];
 
     var save = function save(event) {
-      var properties = ['name', 'description'],
-          data = _.pick(event, properties);
+      var data = event.getAttributes();
 
       if (_.isNumber(event.id)) {
         return $http.put('/api/events/' + event.id, data).then(function (savedEvent) {
@@ -27,15 +27,10 @@ angular.module('speed-dating.services.event', []).factory('EventService', ['$htt
     };
 
     methods.create = function create(name, description) {
-      var event = {
+      return save(new Event({
         name: name,
         description: description
-      };
-
-      return save(event).then(function (event) {
-        event.session = OpenTokService.initSession(OPEN_TOK_API_KEY, event.sessionId);
-        return event;
-      });
+      }));
     };
 
     /**
