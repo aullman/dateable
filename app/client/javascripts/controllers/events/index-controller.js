@@ -12,7 +12,9 @@ angular.module('speed-dating.controllers.events.index', ['speed-dating.services.
 
     $scope.createEvent = function createEvent(event) {
       if ($scope.newEvent.$valid) {
-        EventService.create(event.name, event.description);
+        EventService.create(event.name, event.description).then(function () {
+          $scope.dismiss();
+        });
       }
     };
 

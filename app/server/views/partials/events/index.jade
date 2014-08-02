@@ -12,7 +12,7 @@
       p
         a.btn.btn-primary(href='#', role='button') Join
 
-#eventModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='eventModalLabel', aria-hidden='true')
+#eventModal.modal.fade(sd-modal, tabindex='-1', role='dialog', aria-labelledby='eventModalLabel', aria-hidden='true')
   .modal-dialog
     .modal-content
       form.form-horizontal(role='form', name='newEvent', ng-submit="createEvent(event)", novalidate)

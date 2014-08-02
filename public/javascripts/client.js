@@ -40907,6 +40907,7 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 var speedDatingApp = angular.module('speedDatingApp', [
   'ngRoute',
   'speed-dating.controllers',
+  'speed-dating.directives',
   'speed-dating.filters',
   'speed-dating.services'
 ]);
@@ -40974,7 +40975,9 @@ angular.module('speed-dating.controllers.events.index', ['speed-dating.services.
 
     $scope.createEvent = function createEvent(event) {
       if ($scope.newEvent.$valid) {
-        EventService.create(event.name, event.description);
+        EventService.create(event.name, event.description).then(function () {
+          $scope.dismiss();
+        });
       }
     };
 
@@ -40995,6 +40998,20 @@ angular.module('speed-dating.controllers.index', []).controller('HomeCtrl', ['$s
   function($scope) {
     $scope.msg = 'Welcome to speed dating.';
   }]);
+
+angular.module('speed-dating.directives',[
+  'speed-dating.directives.modal'
+]);
+angular.module('speed-dating.directives.modal', []).directive('sdModal', function() {
+  return {
+    restrict: 'A',
+    link: function(scope, element, attr) {
+      scope.dismiss = function() {
+        element.modal('hide');
+      };
+    }
+  }
+});
 
 angular.module('speed-dating.filters', []);
 
