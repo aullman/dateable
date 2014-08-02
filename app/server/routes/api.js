@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../config/db');
+var Event = require('../config/db').Event;
 var OpenTok = require('opentok'),
     opentok = new OpenTok(process.env.OPEN_TOK_API_KEY, process.env.OPEN_TOK_SECRET);
 
 router.get('/events', function (req, res) {
-  db.Event.findAll().success(function(events) {
+  Event.findAll().success(function(events) {
     res.json(events);
   });
 });
@@ -15,7 +15,7 @@ router.post('/events', function(req, res, next) {
     if (err) {
       return next(err);
     } else {
-      db.Event.create({
+      Event.create({
         name: req.param('name'),
         description: req.param('description'),
         sessionId: session.sessionId
@@ -23,6 +23,19 @@ router.post('/events', function(req, res, next) {
         res.json(event);
       });
     }
+  });
+});
+
+router.get('/events/:id', function (req, res, next) {
+  Event.find(req.param('id')).success(function(event) {
+    res.json(event);
+  });
+});
+
+router.post('/events/:id/publishers', function (req, res, next) {
+  Event.find(req.param('id')).success(function(event) {
+    token = opentok.generateToken(event.sessionId);
+    res.json({token: token});
   });
 });
 

@@ -15,26 +15,36 @@ speedDatingApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
         when('/', {
-          templateUrl: 'partials/index',
-          controller: 'HomeCtrl'
-        }).
-        when('/events', {
+          redirectTo: '/events'
+        })
+        .when('/events', {
           templateUrl: 'partials/events/index',
           controller: 'EventsCtrl'
-        }).
-        when('/events/:eventId', {
+        })
+        .when('/events/:eventId', {
           templateUrl: 'partials/events/event',
-          controller: 'EventCtrl'
-        }).
-        when('/events/:eventId/dates', {
+          controller: 'EventCtrl',
+          resolve: {
+            event: function ($route, EventService) {
+              return EventService.find($route.current.params.eventId);
+            }
+          }
+        })
+        .when('/events/:eventId/dates', {
           templateUrl: 'partials/events/dates/index',
           controller: 'DatesCtrl'
-        }).
-        when('/events/:eventId/dates/:dateId', {
+        })
+        .when('/events/:eventId/dates/:dateId', {
           templateUrl: 'partials/events/dates/date',
           controller: 'DateCtrl'
-        }).
-        otherwise({
+        })
+        .when('/about', {
+          templateUrl: 'partials/about'
+        })
+        .when('/contact', {
+          templateUrl: 'partials/contact'
+        })
+        .otherwise({
           redirectTo: '/'
         });
   }]);

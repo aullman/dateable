@@ -1,11 +1,13 @@
-header.intro-header
+header.page-header
   h1 {{ event.name }}
   p.lead
     | {{ event.description }}
 
 .row.marketing
-  div(ng-repeat="publisher in ['A', 'B', 'C', 'D']")
-    .col-lg-6
-      h4 Publisher {{ publisher }}
-      p
-        | {{ msg }}
+  .col-lg-6(ng-repeat="stream in event.streams")
+    h4 Stream {{ stream }}
+    p
+      | {{ msg }}
+  .col-lg-6
+    h4 Publisher {{ publisher }}
+    sg-publisher(event=event)
