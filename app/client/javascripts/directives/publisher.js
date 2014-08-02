@@ -4,10 +4,10 @@ angular.module('speed-dating.directives.publisher', []).directive('sdPublisher',
       return {
         restrict: 'E',
         scope: {
-          props: '&'
+          event: '='
         },
         link: function (scope, element, attrs) {
-          var event = attrs.event,
+          var event = scope.event,
               properties = {
                 width: element.width(),
                 height: element.height()
@@ -23,17 +23,13 @@ angular.module('speed-dating.directives.publisher', []).directive('sdPublisher',
             } else {
               scope.publisher.destroy();
             }
-
-            event.publishers = event.publishers.filter(function (publisher) {
-              return publisher !== scope.publisher;
-            });
-
+            event.publisher = null;
             scope.publisher = null;
           });
 
-          if (event.session
-              && (event.session.connected || (event.session.isConnected && event.session.isConnected()))) {
-            event.session.publish(scope.publisher);
+          if (event.getSession()
+              && (event.getSession().connected || (event.getSession().isConnected && event.getSession().isConnected()))) {
+            event.getSession().publish(scope.publisher);
           }
 
           event.setPublisher(scope.publisher);

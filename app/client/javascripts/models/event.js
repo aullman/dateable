@@ -42,7 +42,7 @@ angular.module('speed-dating.models.event', []).factory('Event', ['Model', 'Open
           self.streams.push(event.stream);
         },
         streamDestroyed: function(event) {
-          self.streams.splice(self.streams.indexOf(event.stream), 1);
+          self.streams = _.without(streams, event.stream);
         },
         /**
          * Note: If you intend to reuse a Publisher object created using OT.initPublisher() to publish to different sessions sequentially, call either Session.disconnect() or Session.unpublish(). Do not call both. Then call the preventDefault() method of the streamDestroyed or sessionDisconnected event object to prevent the Publisher object from being removed from the page.
