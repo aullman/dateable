@@ -7,6 +7,7 @@ var speedDatingApp = angular.module('speedDatingApp', [
   'speed-dating.controllers',
   'speed-dating.directives',
   'speed-dating.filters',
+  'speed-dating.models',
   'speed-dating.services'
 ]);
 

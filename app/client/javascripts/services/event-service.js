@@ -1,5 +1,5 @@
-angular.module('speed-dating.services.event', []).factory('EventService', ['$http', '$q', 'OpenTokService',
-  function ($http, $q, OpenTokService) {
+angular.module('speed-dating.services.event', []).factory('EventService', ['$http', '$q', 'OpenTokService', 'Event',
+  function ($http, $q, OpenTokService, Event) {
     var methods = {};
 
     /**
