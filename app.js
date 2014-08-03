@@ -70,7 +70,7 @@ app.use(function(err, req, res, next) {
 app.set('port', process.env.PORT || settings.port);
 
 db.sequelize
-    .sync({ force: true }) // Resets the database
+    .sync()
     .complete(function(err) {
       if (err) {
         throw err[0]

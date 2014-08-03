@@ -33,6 +33,11 @@ angular.module('speed-dating.services.event', []).factory('EventService', ['$htt
       }));
     };
 
+    /**
+     * @todo Fetch from server if force option given or if not in cache.
+     * @param id
+     * @returns {Promise}
+     */
     methods.find = function find(id) {
       id = parseInt(id);
       return $q.when(_.find(events, function (event) {
@@ -44,7 +49,19 @@ angular.module('speed-dating.services.event', []).factory('EventService', ['$htt
      * @returns {Array}
      */
     methods.all = function all() {
-      return $q.when(events);
+      return $http.get('/api/events').then(function (response) {
+        var fetchedEvents = _.map(response.data, function (data) {
+          return new Event(data);
+        });
+        events = _.uniq(events.concat(fetchedEvents), false, 'id');
+        return events;
+      });
+    };
+
+    methods.join = function(event) {
+      return $http.post('/api/events/' + event.id + '/tokens', {}).then(function (response) {
+        return response.data.token;
+      });
     };
 
     return methods;

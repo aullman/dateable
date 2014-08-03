@@ -28,7 +28,7 @@ angular.module('speed-dating.models.event', []).factory('Event', ['Model', 'Open
       return this.session;
     },
 
-    initiate: function initiate() {
+    initiate: function initiate(token) {
       var session = this.getSession(),
           self = this;
       if (!session) {
@@ -44,17 +44,13 @@ angular.module('speed-dating.models.event', []).factory('Event', ['Model', 'Open
         streamDestroyed: function(event) {
           self.streams = _.without(streams, event.stream);
         },
-        /**
-         * Note: If you intend to reuse a Publisher object created using OT.initPublisher() to publish to different sessions sequentially, call either Session.disconnect() or Session.unpublish(). Do not call both. Then call the preventDefault() method of the streamDestroyed or sessionDisconnected event object to prevent the Publisher object from being removed from the page.
-         *
-         * @param event
-         */
         sessionDisconnected: function(event) {
           self.streams.length = 0;
         }
       });
 
-      session.connect(OpenTokService.API_KEY, this.publisher.token);
+      session.connect(OpenTokService.API_KEY, token);
+      return this;
     },
 
     setPublisher: function setPublisher(publisher) {

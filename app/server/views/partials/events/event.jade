@@ -7,6 +7,7 @@ header.page-header
   .col-lg-6(ng-repeat="stream in event.streams")
     h4 Stream {{ stream }}
     p
-      | {{ msg }}
+      | Add stream video here.
   .col-lg-6
     h4 Publisher {{ publisher }}
+    sd-publisher(event='event')

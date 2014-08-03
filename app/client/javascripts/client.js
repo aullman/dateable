@@ -26,7 +26,11 @@ speedDatingApp.config(['$routeProvider',
           controller: 'EventCtrl',
           resolve: {
             event: function ($route, EventService) {
-              return EventService.find($route.current.params.eventId);
+              return EventService.find($route.current.params.eventId).then(function (event) {
+                return EventService.join(event).then(function (token) {
+                  return event.initiate(token);
+                });
+              });
             }
           }
         })
