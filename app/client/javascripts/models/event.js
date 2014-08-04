@@ -49,7 +49,7 @@ angular.module('speed-dating.models.event', []).factory('Event', ['Model', 'Open
         }
       });
 
-      session.connect(OpenTokService.API_KEY, token);
+      session.connect(token);
       return this;
     },
 
